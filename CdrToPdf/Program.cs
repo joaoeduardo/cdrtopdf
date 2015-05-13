@@ -1,25 +1,23 @@
-﻿/*
- * Created by SharpDevelop.
- * User: vagrant
- * Date: 13/05/2015
- * Time: 11:20
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
- */
-using System;
+﻿using System;
+using Corel.Interop.CorelDRAW;
 
 namespace CdrToPdf
 {
 	class Program
 	{
-		public static void Main(string[] args)
+		public static void Main(String[] args)
 		{
-			Console.WriteLine("Hello World!");
+			String source = args[0];
 			
-			// TODO: Implement Functionality Here
+			String release = args[1];
 			
-			Console.Write("Press any key to continue . . . ");
-			Console.ReadKey(true);
+			Application application = new Application();
+			
+			Document document = application.OpenDocument(source, 1);
+			
+			document.PublishToPDF(release);
+			
+			document.Close();
 		}
 	}
 }
