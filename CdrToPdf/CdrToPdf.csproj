@@ -31,6 +31,8 @@
     <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Corel.Interop.CorelDRAW" />
+    <Reference Include="Corel.Interop.VGCore" />
     <Reference Include="Microsoft.CSharp">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
