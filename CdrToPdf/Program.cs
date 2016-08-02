@@ -1,5 +1,8 @@
 ﻿using System;
-using Corel.Interop.CorelDRAW;
+
+using IApplication = Corel.Interop.VGCore.IVGApplication;
+using IDocument    = Corel.Interop.VGCore.IVGDocument;
+using Application  = Corel.Interop.CorelDRAW.ApplicationClass;
 
 namespace CdrToPdf
 {
@@ -11,13 +14,15 @@ namespace CdrToPdf
 			
 			String release = args[1];
 			
-			Application application = new Application();
+			IApplication application = new Application();
 			
-			Document document = application.OpenDocument(source, 1);
+			IDocument document = application.OpenDocument(source);
 			
 			document.PublishToPDF(release);
 			
 			document.Close();
+			
+			application.Quit();
 		}
 	}
 }
