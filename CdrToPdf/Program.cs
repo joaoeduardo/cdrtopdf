@@ -1,4 +1,6 @@
-﻿using System;
+﻿using String      = System.String;
+using Environment = System.Environment;
+using Path        = System.IO.Path;
 
 using IApplication = Corel.Interop.VGCore.IVGApplication;
 using IDocument    = Corel.Interop.VGCore.IVGDocument;
@@ -10,15 +12,19 @@ namespace CdrToPdf
 	{
 		public static void Main(String[] args)
 		{
-			String source = args[0];
+			String currentDirectoryPath = Environment.CurrentDirectory;
 			
-			String release = args[1];
+			String sourceFile  = args[0];			
+			String releaseFile = args[1];
+			
+			String sourcePath  = Path.IsPathRooted(sourceFile)  ? sourceFile  : Path.Combine(currentDirectoryPath, sourceFile);			
+			String releasePath = Path.IsPathRooted(releaseFile) ? releaseFile : Path.Combine(currentDirectoryPath, releaseFile);
 			
 			IApplication application = new Application();
 			
-			IDocument document = application.OpenDocument(source);
+			IDocument document = application.OpenDocument(sourcePath);
 			
-			document.PublishToPDF(release);
+			document.PublishToPDF(releasePath);
 			
 			document.Close();
 			
